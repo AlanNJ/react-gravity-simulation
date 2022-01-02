@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import Canvas from "./components/Canvas";
+import Settings from "./components/Settings";
+import "./components/index.css";
+import { About } from "./components/About";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [gravity, setGravity] = useState(0.98);
+	const [friction, setFriction] = useState(0.99);
+	const [balls, setBalls] = useState(100);
+	var style;
+
+	return (
+		<>
+			<p>Gravity Balls Simulation</p>
+			<div className="App">
+				<Settings
+					gravity={gravity}
+					setGravity={setGravity}
+					friction={friction}
+					setFriction={setFriction}
+					balls={balls}
+					setBalls={setBalls}
+				/>
+				<Canvas gravity={gravity} friction={friction} balls={balls} />
+			</div>
+			<About />
+		</>
+	);
 }
 
 export default App;
