@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useRef, useEffect } from "react";
 
 export const Canvas = ({ gravity, friction, balls }) => {
-	//console.log(gravity);
 	const canvasRef = useRef(null);
 
 	useEffect(() => {
@@ -33,7 +32,7 @@ export const Canvas = ({ gravity, friction, balls }) => {
 
 				ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
 				ctx.fill();
-				ctx.fillStyle = "red";
+				ctx.fillStyle = getRandomColor();
 				ctx.stroke();
 			};
 			this.play = function () {
@@ -42,11 +41,7 @@ export const Canvas = ({ gravity, friction, balls }) => {
 					this.dx = this.dx * fric;
 				} else {
 					this.dy += grav;
-					//console.log(dy);
 				}
-				// if (this.x + this.radius + this.dx >= innerWidth || this.x - this.radius < 0) {
-				// 	this.dx = -this.dx * 0;
-				// }
 
 				if (
 					this.x + this.radius >= cont.clientWidth ||
@@ -72,7 +67,6 @@ export const Canvas = ({ gravity, friction, balls }) => {
 				const ball = new Ball(x, y, radius, dx, dy);
 				ballArray.push(ball);
 			}
-			//console.log(ballArray);
 		}
 
 		const animate = () => {
@@ -91,6 +85,14 @@ export const Canvas = ({ gravity, friction, balls }) => {
 		animate();
 
 		createMotion();
+		function getRandomColor() {
+			var letters = "0123456789ABCDEF";
+			var color = "#";
+			for (var i = 0; i < 6; i++) {
+				color += letters[Math.floor(Math.random() * 16)];
+			}
+			return color;
+		}
 	};
 
 	return (
